@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>钓鱼爆金服官网</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Roboto', sans-serif; 
+      color: #fff; 
+      text-align: center; 
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    a { color: #00d1ff; text-decoration: none; cursor: pointer; }
+    a:hover { text-decoration: underline; }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .glass { 
+      background: rgba(255,255,255,0.15); 
+      backdrop-filter: blur(10px); 
+      -webkit-backdrop-filter: blur(10px); 
+      border: 1px solid rgba(255,255,255,0.3); 
+      border-radius: 10px; 
+      padding: 20px; 
+      margin: 20px auto; 
+      max-width: 600px; 
+      position: relative; 
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37); 
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .glass:hover { transform: translateY(-5px); box-shadow: 0 12px 48px 0 rgba(31,38,135,0.45); }
+    header { padding: 20px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    header h1 { font-size: 2.5em; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+    nav { margin-top: 10px; }
+    nav a, nav span { margin: 0 15px; font-size: 1.2em; }
+    main { padding: 20px; }
+    section { margin: 30px 0; }
+    section h2 { font-size: 2em; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+    section p { font-size: 1.1em; line-height: 1.6; }
+    .btn { 
+      display: inline-block; 
+      padding: 12px 25px; 
+      background: linear-gradient(45deg, #00c6ff, #0072ff); 
+      color: #fff; 
+      border-radius: 50px; 
+      font-size: 1.1em; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      transition: background 0.3s, transform 0.3s; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+      margin-top: 10px; 
+    }
+    .btn:hover { transform: scale(1.05); background: linear-gradient(45deg, #0072ff, #00c6ff); }
+    #server-images { 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 10px; 
+      margin: 20px auto; 
+      max-width: 600px; 
+    }
+    #server-images img { 
+      width: calc(20% - 10px); 
+      border-radius: 5px; 
+      transition: transform 0.3s; 
+    }
+    #server-images img:hover { transform: scale(1.05); }
+    footer { padding: 20px; background: linear-gradient(135deg, #0f2027, #203a43); margin-top: 30px; font-size: 1em; }
+
+    #rain-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    #rain-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .img-modal {
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .close-hint {
+      position: absolute;
+      bottom: 20px;
+      color: #fff;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="rain-container">
+    <canvas id="rain-canvas"></canvas>
+  </div>
+
+  <header class="glass" id="mainHeader">
+    <h1 class="text-shadow">钓鱼爆金服</h1>
+    <nav>
+      <a href="#home">主页</a>
+      <a href="https://qm.qq.com/q/M5qW85JueY" target="_blank">加入群聊</a>
+      <a href="./apks/Fold Craft Launcher_1.2.2.1.apk" target="_blank">下载游戏(FCL)</a>
+      <a href="./apks/MobileGlues_1.2.4.apk" target="_blank">下载渲染器</a>
+    </nav>
+  </header>
+  <main id="mainContent">
+    <section id="home" class="glass transition-all">
+      <h2 class="text-shadow">服务器简介</h2>
+      <p>欢迎来到此服务器，这里有丰富的玩法、刺激的探险以及精彩的活动！</p>           
+      <h2 class="text-shadow">服务器状态</h2>
+      <p>在线人数：<span id="online-count">加载中...</span></p>
+      <p>服务器版本：<span id="server-version">加载中...</span></p>
+      <a id="join-server" class="btn btn-shadow">加入服务器</a>
+    </section>
+    <section id="announcement" class="glass">
+      <h2 class="text-shadow">公告</h2>
+      <div id="announcement-list"><p>加载中...</p></div>
+    </section>
+    <section id="server-images" class="glass">
+    </section>
+  </main>
+  <footer class="glass" id="mainFooter">
+    <p>© 2025 钓鱼爆金服</p>
+  </footer>
+  
+  <div id="img-modal" class="img-modal" style="display: none;">
+    <img class="modal-content" id="modal-img" alt="放大图片">
+    <div class="close-hint">点击任意空白区域关闭</div>
+  </div>
+  
+  <script>
+    let rainAnimationId = null;
+    
+    const configData = {
+      serverName: "生存大陆",
+      serverIP: "43.248.103.155",//ip
+      serverPort: "16166",//端口
+      announcement: "欢迎来到生存大陆！这里的公告直接写在代码中。",
+      serverImages: [
+        "images/server1.jpg",
+        "images/server2.jpg",
+        "images/server3.jpg",
+        "images/server4.jpg",
+        "images/server5.jpg"
+      ],
+      backgroundImage: "images/your_custom_bg.jpg"  //背景图片
+    };
+    
+    document.body.style.backgroundImage = `url(${configData.backgroundImage})`;
+    
+    document.getElementById("join-server").setAttribute("href",
+      `minecraft://?addExternalServer=${configData.serverName}|${configData.serverIP}:${configData.serverPort}`
+    );
+    document.getElementById("announcement-list").innerHTML = `<p>${configData.announcement}</p>`;
+    let imgHTML = "";
+    configData.serverImages.forEach(url => { 
+      imgHTML += `<img src="${url}" alt="服务器图片">`; 
+    });
+    document.getElementById("server-images").innerHTML = imgHTML;
+    
+    function fetchServerStatus() {
+      if (!configData.serverIP || !configData.serverPort) return;
+      fetch(`https://api.mcstatus.io/v2/status/bedrock/${configData.serverIP}:${configData.serverPort}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.online === true) {
+            const online = data.players && data.players.online ? data.players.online : 0;
+            const maxPlayers = data.players && data.players.max ? data.players.max : 0;
+            const version = data.version && data.version.name ? data.version.name : '未知';
+            document.getElementById('online-count').innerText = `${online} / ${maxPlayers}`;
+            document.getElementById('server-version').innerText = version;
+          } else {
+            document.getElementById('online-count').innerText = '0 / 0';
+            document.getElementById('server-version').innerText = 'JavaMC-1.20.1';
+          }
+        })
+        .catch(err => {
+          console.error('获取服务器状态错误:', err);
+          document.getElementById('online-count').innerText = '获取失败';
+          document.getElementById('server-version').innerText = '获取失败';
+        });
+    }
+    setTimeout(fetchServerStatus, 1000);
+    setInterval(fetchServerStatus, 10000);
+    
+    function initRain(canvas) {
+      const ctx = canvas.getContext("2d");
+      let drops = [];
+      const numDrops = 100;
+      const width = canvas.width;
+      const height = canvas.height;
+      for (let i = 0; i < numDrops; i++) {
+        drops.push({ x: Math.random() * width, y: Math.random() * height, speed: 2 + Math.random() * 3, length: 10 + Math.random() * 10 });
+      }
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255,255,255,0.5)";
+        for (let drop of drops) {
+          ctx.fillRect(drop.x, drop.y, 2, drop.length);
+          drop.y += drop.speed;
+          if (drop.y > canvas.height) { 
+            drop.y = -drop.length; 
+            drop.x = Math.random() * canvas.width; 
+          }
+        }
+        rainAnimationId = requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    
+    function setupRain() {
+      const canvas = document.getElementById("rain-canvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initRain(canvas);
+    }
+    
+    setupRain();
+    
+    window.addEventListener("resize", () => {
+      if (rainAnimationId) {
+        cancelAnimationFrame(rainAnimationId);
+      }
+      setupRain();
+    });
+    
+    document.querySelectorAll("#server-images img").forEach(img => {
+      img.addEventListener("click", function() {
+        document.getElementById("img-modal").style.display = "flex";
+        document.getElementById("modal-img").src = this.src;
+      });
+    });
+    
+    document.getElementById("img-modal").addEventListener("click", function(e) {
+      if (e.target === this) {
+        this.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
